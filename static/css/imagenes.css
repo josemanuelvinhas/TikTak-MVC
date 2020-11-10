@@ -25,3 +25,12 @@
     max-width: 8rem;
     width: 100%;
 }
+
+.video-card-view {
+    max-width: 20rem;
+    width: 100%;
+}
+
+.description {
+    max-width: fit-content;
+}

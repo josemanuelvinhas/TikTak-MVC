@@ -90,6 +90,8 @@ class VideoController extends BaseController
 
 
 
+        $this->view->render("video","view");
+
     }
 
 

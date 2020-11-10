@@ -2,85 +2,67 @@
 require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 
-$posts = $view->getVariable("videos");
-$usuario = $view->getVariable("usuario");
-$isFollowing = $view->getVariable("isFollowing");
 ?>
 
 
-
-<div class="col-12 row justify-content-center m-0 mt-3 mb-3 p-0">
-    <div class="col-xl-6 col-lg-8 col-10 m-0 p-0 list-group">
-
-        <div class="row row-cols-2 justify-content-between align-items-center p-0 pb-2 pt-2 list-group-item bg-gris">
-            <div class="col text-center font-weight-bold"><?= "@" . $usuario->getUsername() ?></div>
-            <?php if ($usuario->getUsername() === $_SESSION["currentuser"]): ?>
-                <div class="col text-center">
-                    <a data-toggle="modal" data-target="#modalUpload">
-                        <img class="bt-subir m-2" src="static/img/subir.svg"
-                             alt="<?= i18n("Upload Video") ?>">
-                    </a>
+<div class="col-12 justify-content-center">
+    <div class="col-10 col-sm-12 row justify-content-center m-0 mt-3 mb-3 p-0">
+        <div class="m-0 p-0 list-group">
+            <div
+                    class="row row-cols-2 justify-content-center align-items-center p-0 pb-2 pt-2 list-group-item bg-gris">
+                <div class="col font-weight-bold">@yomiquesh</div>
+                <div class="col text-right">
+                    <div class="btn-group dropleft">
+                        <img class="bt-menu m-2" src="static/img/menuHor.svg" data-toggle="dropdown" alt="abrir menu video">
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a class="dropdown-item"
+                                   href="index.php?controller=home&action=index">Inicio</a></li>
+                            <li><a class="dropdown-item"
+                                   href="index.php?controller=user&action=home">Portada</a></li>
+                            <li><a class="dropdown-item"
+                                   href="index.php?controller=user&action=view&username=yomiquesh">Perfil</a>
+                            </li>
+                            <li><a class="dropdown-item" data-toggle="modal" data-target="#modalUpload"
+                                   href="">Subir
+                                    Video</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a class="dropdown-item"
+                                   href="index.php?controller=user&amp;action=logout">Pechar
+                                    Sesión</a></li>
+                        </ul>
+                    </div>
                 </div>
-            <?php else:
-                if ($isFollowing === true):?>
-                    <div class="col text-center">
-                        <form action="index.php?controller=follower&action=unfollow" method="post">
-                            <input type="hidden" name="username" value="<?= $usuario->getUsername() ?>">
-                            <input class="btn bt-outline-primary m-1" type="submit" value="<?= i18n("Unfollow") ?>"">
-                        </form>
-                    </div>
-                <?php else: ?>
-                    <div class="col text-center">
-                        <form action="index.php?controller=follower&action=follow" method="post">
-                            <input type="hidden" name="username" value="<?= $usuario->getUsername() ?>">
-                            <input class="btn bt-primary m-1" type="submit" value="<?= i18n("Follow") ?>"">
-                        </form>
-                    </div>
-                <?php endif;
-            endif ?>
-
-
-        </div>
-
-        <div class="row row-cols-3 justify-content-between p-0 pt-3 pb-3 list-group-item">
-            <div class="col row row-cols-1 justify-content-center p-0">
-                <div class="col text-center"><?= count($posts) ?></div>
-                <div class="col text-center"><?= i18n("videos") ?></div>
             </div>
-            <div class="col row row-cols-1 justify-content-center p-0">
-                <div class="col text-center"><?= $usuario->getNfollowers() ?></div>
-                <div class="col text-center"><?= i18n("followers") ?></div>
+
+            <div class="row row-cols-1 p-0 pt-3 pb-3 list-group-item">
+                <div class="col row justify-content-center m-0">
+                    <video class="video-card-view m-1" src="videos/video_2.mp4" autoplay muted loop
+                           controls></video>
+                </div>
             </div>
-            <div class="col row row-cols-1 justify-content-center p-0">
-                <div class="col text-center"><?= $usuario->getNfollowings() ?></div>
-                <div class="col text-center"><?= i18n("following") ?></div>
+
+            <div class="row justify-content-between align-items-center pt-3 pb-3 list-group-item">
+
+                <div class="row m-0 p-0 align-items-center">
+                    <a data-toggle="modal" data-target="#modalLogin"><img class="bt-fav m-2"
+                                                                          src="img/estrella_llena.svg"
+                                                                          alt="me gusta"></a>
+                    12736
+                </div>
+                <div class="row m-0 p-0 text-right">
+                    <a onclick=""><img class="bt-fav m-2" src="img/compartir.svg" alt="compartir"></a>
+                </div>
+            </div>
+
+
+            <div class="row pt-3 pb-3 list-group-item">
+
+                <p class="m-0 p-0 text-center description">It’s starting to look like Christmas 🎄 a little bit
+                    of creation #fyp #parati #christmas It’s starting to look like Christmas 🎄 a little bit
+                    of creation #fyp #parati #christmas It’s starting to look like Christmas 🎄 a little bit
+                    of creation #fyp #parati #christmas It’s starting to look like Christmas 🎄 a little bit
+                    of creation #fyp #parati #christmas</p>
             </div>
         </div>
-
-        <div class="row row-cols-sm-3 row-cols-1 p-0 pt-3 pb-3 list-group-item">
-            <?php
-            $cont = 0;
-            foreach ($posts as $post):
-                if (($cont % 3) === 0):
-                    ?>
-                    <div class="col row justify-content-sm-end justify-content-center m-0">
-                        <video class="video-card-perfil m-1" src="upload_videos/<?= $post->getVideoname() ?>"
-                               autoplay muted loop controls></video>
-                    </div>
-                <?php elseif (($cont % 3) === 1): ?>
-                    <div class="col row justify-content-sm-center justify-content-center m-0">
-                        <video class="video-card-perfil m-1" src="upload_videos/<?= $post->getVideoname() ?>"
-                               autoplay muted loop controls></video>
-                    </div>
-                <?php else: ?>
-                    <div class="col row justify-content-sm-start justify-content-center m-0">
-                        <video class="video-card-perfil m-1" src="upload_videos/<?= $post->getVideoname() ?>"
-                               autoplay muted loop controls></video>
-                    </div>
-                <?php endif;
-                $cont++;
-            endforeach; ?>
-        </div>
-
     </div>
 </div>

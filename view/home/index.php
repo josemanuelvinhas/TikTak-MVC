@@ -58,8 +58,10 @@ $page = $view->getVariable("page");
                 </div>
 
                 <div class="card-body row justify-content-center p-2">
-                    <video class="video-card" src="upload_videos/<?= $post->getVideoname() ?>" autoplay muted loop
-                           controls></video>
+                    <a href="index.php?controller=video&amp;action=view&amp;id=<?= $post->getId() ?>">
+                        <video class="video-card" src="upload_videos/<?= $post->getVideoname() ?>" autoplay muted loop
+                               controls></video>
+                    </a>
                 </div>
 
                 <div class="card-footer pt-0 ">
