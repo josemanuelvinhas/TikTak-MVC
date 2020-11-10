@@ -21,23 +21,23 @@ class LikeController extends BaseController
     public function like()
     {
 
-        if(isset($_POST["username"]) & isset($_POST["id"])){
-            $like = new Like($_POST["id"],$_POST["username"]);
+        if (isset($_POST["username"]) & isset($_POST["id"])) {
+            $like = new Like($_POST["id"], $_POST["username"]);
             $this->likeMapper->save($like);
         }
 
-        $this->view->redirect("home", "index");
+        $this->view->redirectToReferer();
     }
 
     public function dislike()
     {
 
-        if(isset($_POST["username"]) & isset($_POST["id"])){
-            $like = new Like($_POST["id"],$_POST["username"]);
+        if (isset($_POST["username"]) & isset($_POST["id"])) {
+            $like = new Like($_POST["id"], $_POST["username"]);
             $this->likeMapper->delete($like);
         }
 
-        $this->view->redirect("home", "index");
+        $this->view->redirectToReferer();
     }
 
 }

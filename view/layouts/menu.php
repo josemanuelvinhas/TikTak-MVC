@@ -1,8 +1,10 @@
-<form class="">
+<form method="get" action="index.php">
     <div class="input-group">
         <div class="input-group-prepend">
             <div class="input-group-text">#</div>
         </div>
-        <input class="form-control" type="search" placeholder="<?= i18n("SearchByHashtag") ?>">
+        <input type="hidden" name="controller" value="video">
+        <input type="hidden" name="action" value="search">
+        <input class="form-control" type="search" name="hashtag" placeholder="<?= i18n("SearchByHashtag") ?>">
     </div>
 </form>

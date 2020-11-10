@@ -27,6 +27,14 @@ class LikeMapper
 
     }
 
+    public function isLike($username, $id)
+    {
+        $stmt = $this->db->prepare("SELECT id FROM likes WHERE username=? and id=?");
+        $stmt->execute(array($username, $id));
+
+        return $stmt->fetchColumn() > 0;
+    }
+
     public function save($like)
     {
         $stmt = $this->db->prepare("INSERT INTO likes(id,username) values (?,?)");

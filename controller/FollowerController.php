@@ -25,7 +25,7 @@ class FollowerController extends BaseController
             $this->followerMapper->save($follower);
         }
 
-        $this->view->redirect("home", "index");
+        $this->view->redirectToReferer();
     }
 
     public function unfollow()
@@ -35,7 +35,7 @@ class FollowerController extends BaseController
             $this->followerMapper->delete($follower);
         }
 
-        $this->view->redirect("home", "index");
+        $this->view->redirectToReferer();
     }
 
 }

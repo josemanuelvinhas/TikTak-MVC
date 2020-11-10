@@ -67,7 +67,6 @@ class HomeController extends BaseController
         }
 
         if ($nPags > 1) {
-
             $pagePrevious = $page - 1;
             $pageNext = $page + 1;
             if ($page == 0) {

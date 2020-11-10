@@ -13,30 +13,37 @@ $isFollowing = $view->getVariable("isFollowing");
 
         <div class="row row-cols-2 justify-content-between align-items-center p-0 pb-2 pt-2 list-group-item bg-gris">
             <div class="col text-center font-weight-bold"><?= "@" . $usuario->getUsername() ?></div>
-            <?php if ($usuario->getUsername() === $_SESSION["currentuser"]): ?>
+            <?php if (isset($_SESSION["currentuser"])) {
+                if ($usuario->getUsername() === $_SESSION["currentuser"]): ?>
+                    <div class="col text-center">
+                        <a data-toggle="modal" data-target="#modalUpload">
+                            <img class="bt-subir m-2" src="static/img/subir.svg"
+                                 alt="<?= i18n("Upload Video") ?>">
+                        </a>
+                    </div>
+                <?php else:
+                    if ($isFollowing === true):?>
+                        <div class="col text-center">
+                            <form action="index.php?controller=follower&action=unfollow" method="post">
+                                <input type="hidden" name="username" value="<?= $usuario->getUsername() ?>">
+                                <input class="btn bt-outline-primary m-1" type="submit" value="<?= i18n("Unfollow") ?>"">
+                            </form>
+                        </div>
+                    <?php else: ?>
+                        <div class="col text-center">
+                            <form action="index.php?controller=follower&action=follow" method="post">
+                                <input type="hidden" name="username" value="<?= $usuario->getUsername() ?>">
+                                <input class="btn bt-primary m-1" type="submit" value="<?= i18n("Follow") ?>"">
+                            </form>
+                        </div>
+                    <?php endif;
+                endif;
+            } else { ?>
                 <div class="col text-center">
-                    <a data-toggle="modal" data-target="#modalUpload">
-                        <img class="bt-subir m-2" src="static/img/subir.svg"
-                             alt="<?= i18n("Upload Video") ?>">
-                    </a>
+                    <button class="btn bt-primary m-1" data-toggle="modal"
+                            data-target="#modalLogin"><?= i18n("Follow") ?></button>
                 </div>
-            <?php else:
-                if ($isFollowing === true):?>
-                    <div class="col text-center">
-                        <form action="index.php?controller=follower&action=unfollow" method="post">
-                            <input type="hidden" name="username" value="<?= $usuario->getUsername() ?>">
-                            <input class="btn bt-outline-primary m-1" type="submit" value="<?= i18n("Unfollow") ?>"">
-                        </form>
-                    </div>
-                <?php else: ?>
-                    <div class="col text-center">
-                        <form action="index.php?controller=follower&action=follow" method="post">
-                            <input type="hidden" name="username" value="<?= $usuario->getUsername() ?>">
-                            <input class="btn bt-primary m-1" type="submit" value="<?= i18n("Follow") ?>"">
-                        </form>
-                    </div>
-                <?php endif;
-            endif ?>
+            <?php } ?>
 
 
         </div>

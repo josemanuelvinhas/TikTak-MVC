@@ -12,10 +12,6 @@ $previous = $view->getVariable("previous");
 $page = $view->getVariable("page");
 ?>
 
-<div class="col-12 row justify-content-center m-0">
-    <h4 class="m-0 mt-4"><?= i18n("Index") ?></h4>
-</div>
-
 <div class="col-12 justify-content-center d-xl-none d-block">
     <div class="col-12 mt-4">
         <?php
@@ -25,7 +21,11 @@ $page = $view->getVariable("page");
 </div>
 
 
-<div class="col-12 col-xl-9 row row-cols-lg-3 row-cols-md-2 row-cols-1 m-0 mt-3 mt-xl-5 justify-content-center">
+<div class="col-12 col-xl-9 row m-0justify-content-center">
+    <div class="col-12 row  mt-3 justify-content-center m-0">
+        <h4 class="m-0 mt-4"><?= i18n("Index") ?></h4>
+    </div>
+    <div class="col-12 row row-cols-lg-3 row-cols-md-2 row-cols-1 m-0justify-content-center ">
     <?php foreach ($posts as $post): ?>
         <div class="col card">
             <div>
@@ -48,7 +48,7 @@ $page = $view->getVariable("page");
                                 </form>
                             <?php }
                         } else { ?>
-                            <a><img class="bt-fav m-2" src="static/img/borrar.svg"
+                            <a><img class="bt-fav m-2 invisible" src="static/img/borrar.svg"
                                     alt="delete"></a>
                         <?php }
                     } else { ?>
@@ -104,9 +104,27 @@ $page = $view->getVariable("page");
                     </div>
 
                 </div>
+
+
             </div>
         </div>
     <?php endforeach; ?>
+    </div>
+    <div class="col-12 row justify-content-center align-items-center mt-2">
+        <?php if (isset($previous)): ?>
+            <a href="index.php?controller=home&action=index&page=<?= $previous ?>" class="m-2">
+                <img class="bt-pag m-2" src="static/img/anterior.svg" alt="anterior">
+            </a>
+        <?php endif ?>
+
+        <a href="index.php?controller=home&action=index&page=<?= $page ?>" class="m-2"><?= $page ?></a>
+
+        <?php if (isset($next)): ?>
+            <a href="index.php?controller=home&action=index&page=<?= $next ?>" class="m-2">
+                <img class="bt-pag m-2" src="static/img/proximo.svg" alt="siguiente">
+            </a>
+        <?php endif ?>
+    </div>
 </div>
 
 
@@ -152,20 +170,4 @@ $page = $view->getVariable("page");
         </div>
 
     </div>
-</div>
-
-<div class="col-12 row justify-content-center align-items-center mt-2">
-    <?php if (isset($previous)): ?>
-        <a href="index.php?controller=home&action=index&page=<?= $previous ?>" class="m-2">
-            <img class="bt-pag m-2" src="static/img/anterior.svg" alt="anterior">
-        </a>
-    <?php endif ?>
-
-    <a href="index.php?controller=home&action=index&page=<?= $page ?>" class="m-2"><?= $page ?></a>
-
-    <?php if (isset($next)): ?>
-        <a href="index.php?controller=home&action=index&page=<?= $next ?>" class="m-2">
-            <img class="bt-pag m-2" src="static/img/proximo.svg" alt="siguiente">
-        </a>
-    <?php endif ?>
 </div>

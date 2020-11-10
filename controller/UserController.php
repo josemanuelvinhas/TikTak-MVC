@@ -58,7 +58,7 @@ class UserController extends BaseController
     public function home()
     {
         if (!isset($_SESSION["currentuser"])) {
-            $this->view->redirect("home", "index");
+            $this->view->redirectToReferer();
         }
 
         $user = $this->userMapper->findByUsername($_SESSION["currentuser"]);
@@ -135,7 +135,8 @@ class UserController extends BaseController
                     $_SESSION["currentuser"] = $_POST["username"];
 
                     // send user to the restricted area (HTTP 302 code)
-                    $this->view->redirect("home", "index");
+                    //$this->view->redirect("home", "index");
+                    $this->view->redirectToReferer();
 
                 } else {
                     $errors = array();
@@ -204,7 +205,7 @@ class UserController extends BaseController
     public function logout()
     {
         session_destroy();
-        $this->view->redirect("home", "index");
+        $this->view->redirectToReferer();
 
     }
 }
