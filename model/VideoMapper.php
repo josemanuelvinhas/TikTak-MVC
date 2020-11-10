@@ -55,7 +55,7 @@ class VideoMapper
                 $videos["author"],
                 $videos["nlikes"]);
         } else {
-            return NULL;
+            return null;
         }
     }
 
@@ -74,11 +74,33 @@ class VideoMapper
         return $videos;
     }
 
+    public function findAllByHashtag($hashtag, $pagina = 0, $per_page = 6){
+        $stmt = $this->db->prepare("SELECT videos.id, videos.videoname, videos.videodescription, videos.videodate, videos.author, videos.nlikes FROM videos, hashtags WHERE hashtags.hashtag = ? AND hashtags.id=videos.id ORDER BY videos.videodate DESC LIMIT ?,?");
+        $offset = $pagina * $per_page;
+        $stmt->execute(array($hashtag,$offset,$per_page));
+        $videos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $videos = array();
+
+        foreach ($videos_db as $vi) {
+            array_push($videos, new Video($vi["id"], $vi["videoname"], $vi["videodescription"], $vi["videodate"], $vi["author"], $vi["nlikes"]));
+        }
+
+        return $videos;
+    }
+
     public function countVideosByFollower($follower){
         $stmt = $this->db->prepare("SELECT COUNT(videos.id) FROM videos, followers WHERE followers.username_follower = ? AND followers.username_following=videos.author");
         $stmt->execute(array($follower));
         return $stmt->fetchColumn();
     }
+
+    public function countVideosByHashtag($hashtag){
+        $stmt = $this->db->prepare("SELECT COUNT(videos.id) FROM videos, hashtags WHERE hashtags.hashtag = ? AND hashtags.id=videos.id");
+        $stmt->execute(array($hashtag));
+        return $stmt->fetchColumn();
+    }
+
 
     public function findAllByAuthor($author)
     {

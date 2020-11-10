@@ -3,6 +3,10 @@
 require_once(__DIR__ . "/../model/Video.php");
 require_once(__DIR__ . "/../model/VideoMapper.php");
 
+require_once(__DIR__ . "/../model/LikeMapper.php");
+
+require_once(__DIR__ . "/../model/FollowerMapper.php");
+
 require_once(__DIR__ . "/../model/Hashtag.php");
 require_once(__DIR__ . "/../model/HashtagMapper.php");
 
@@ -14,6 +18,8 @@ class VideoController extends BaseController
 
     private $videoMapper;
     private $hashtagMapper;
+    private $likeMapper;
+    private $followerMapper;
 
     public function __construct()
     {
@@ -21,6 +27,8 @@ class VideoController extends BaseController
 
         $this->videoMapper = new VideoMapper();
         $this->hashtagMapper = new HashtagMapper();
+        $this->likeMapper = new LikeMapper();
+        $this->followerMapper = new FollowerMapper();
     }
 
     public function upload()
@@ -67,7 +75,7 @@ class VideoController extends BaseController
 
                     $hashtags = array_unique($matches[0]);
                     foreach ($hashtags as $hs) {
-                        $hashtag = new Hashtag((int) $id, $hs);
+                        $hashtag = new Hashtag((int)$id, $hs);
                         $this->hashtagMapper->save($hashtag);
                     }
 
@@ -86,12 +94,99 @@ class VideoController extends BaseController
 
     }
 
-    public function view(){
+    public function delete()
+    {
+        if (isset($_POST["id"])) {
+
+            $video = $this->videoMapper->findById($_POST["id"]);
+
+            if ($video != null && $video->getAuthor() === $_SESSION["currentuser"]) {
+                $this->videoMapper->delete($video);
+                $this->view->redirect("home", "index");
+            } else {
+                $this->view->redirectToReferer();
+            }
+        } else {
+            $this->view->redirectToReferer();
+        }
+    }
+
+    public function view()
+    {
+
+        if (isset($_GET["id"])) {
+
+            $video = $this->videoMapper->findById($_GET["id"]);
+
+            if ($video === null) {
+                $this->view->redirectToReferer();
+            } else {
+                $this->view->setVariable("video", $video);
+
+                if (isset($_SESSION["currentuser"])) {
+                    $isLike = $this->likeMapper->isLike($_SESSION["currentuser"], $_GET["id"]);
+                    $this->view->setVariable("isLike", $isLike);
+
+                    $isFollow = $this->followerMapper->isFollowing($_SESSION["currentuser"], $video->getAuthor());
+                    $this->view->setVariable("isFollow", $isFollow);
+                }
+
+                $this->view->render("video", "view");
+            }
+        } else {
+            $this->view->redirectToReferer();
+        }
 
 
+    }
 
-        $this->view->render("video","view");
+    public function search()
+    {
+        if (isset($_GET["hashtag"])) {
 
+            $nVideos = $this->videoMapper->countVideosByHashtag("#" . $_GET["hashtag"]);
+            $nPags = ceil($nVideos / 6);
+            $page = 0;
+            if (isset($_GET["page"])) {
+                if (preg_match('/^[0-9]+$/', $_GET["page"]) && ($temp = (int)$_GET["page"]) < $nPags) {
+                    $page = $temp;
+                } else {
+                    $this->view->redirectToReferer();
+                }
+            }
+
+            $videos = $this->videoMapper->findAllByHashtag("#" . $_GET["hashtag"], $page);
+            $this->view->setVariable("videos", $videos);
+
+            if (isset($_SESSION["currentuser"])) {
+                $idLikes = $this->likeMapper->findByUsername($_SESSION["currentuser"]);
+                $this->view->setVariable("idLikes", $idLikes);
+
+                $followers = $this->followerMapper->findFollowingByUsername($_SESSION["currentuser"]);
+                $this->view->setVariable("followers", $followers);
+            }
+
+            if ($nPags > 1) {
+                $pagePrevious = $page - 1;
+                $pageNext = $page + 1;
+                if ($page == 0) {
+                    $this->view->setVariable("next", $pageNext);
+                } elseif ($page == ($nPags - 1)) {
+                    $this->view->setVariable("previous", $pagePrevious);
+                } else {
+                    $this->view->setVariable("next", $pageNext);
+                    $this->view->setVariable("previous", $pagePrevious);
+                }
+            }
+            $this->view->setVariable("page", $page);
+
+            $this->view->setVariable("hashtag", $_GET["hashtag"]);
+
+            $this->view->render("video", "search");
+
+        } else {
+            $this->view->redirectToReferer();
+        }
     }
 
 

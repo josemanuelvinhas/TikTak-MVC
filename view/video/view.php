@@ -2,6 +2,10 @@
 require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 
+$video = $view->getVariable("video");
+$isLike = $view->getVariable("isLike");
+$isFollow = $view->getVariable("isFollow");
+
 ?>
 
 
@@ -10,33 +14,45 @@ $view = ViewManager::getInstance();
         <div class="m-0 p-0 list-group">
             <div
                     class="row row-cols-2 justify-content-center align-items-center p-0 pb-2 pt-2 list-group-item bg-gris">
-                <div class="col font-weight-bold">@yomiquesh</div>
+                <div class="col font-weight-bold">
+                    <a class="text-dark"
+                       href="index.php?controller=user&action=view&username=<?= $video->getAuthor() ?>">
+                        @<?= $video->getAuthor() ?></a>
+                </div>
                 <div class="col text-right">
-                    <div class="btn-group dropleft">
-                        <img class="bt-menu m-2" src="static/img/menuHor.svg" data-toggle="dropdown" alt="abrir menu video">
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a class="dropdown-item"
-                                   href="index.php?controller=home&action=index">Inicio</a></li>
-                            <li><a class="dropdown-item"
-                                   href="index.php?controller=user&action=home">Portada</a></li>
-                            <li><a class="dropdown-item"
-                                   href="index.php?controller=user&action=view&username=yomiquesh">Perfil</a>
-                            </li>
-                            <li><a class="dropdown-item" data-toggle="modal" data-target="#modalUpload"
-                                   href="">Subir
-                                    Video</a></li>
-                            <li class="dropdown-divider"></li>
-                            <li><a class="dropdown-item"
-                                   href="index.php?controller=user&amp;action=logout">Pechar
-                                    Sesión</a></li>
-                        </ul>
-                    </div>
+
+                    <?php if (isset($_SESSION["currentuser"])) {
+                        if ($video->getAuthor() === $_SESSION["currentuser"]) { ?>
+                            <form action="index.php?controller=video&action=delete" method="post">
+                                <input type="hidden" name="id" value="<?= $video->getId() ?>">
+                                <input class="bt-fav m-2" type="image" src="static/img/borrar.svg"
+                                       alt="<?= i18n("Delete") ?>">
+                            </form>
+                        <?php } else {
+                            if ($isFollow === true) { ?>
+                                <form action="index.php?controller=follower&action=unfollow" method="post">
+                                    <input type="hidden" name="username" value="<?= $video->getAuthor() ?>">
+                                    <input class="btn bt-outline-primary m-1" type="submit"
+                                           value="<?= i18n("Unfollow") ?>"">
+                                </form>
+                            <?php } else { ?>
+                                <form action="index.php?controller=follower&action=follow" method="post">
+                                    <input type="hidden" name="username" value="<?= $video->getAuthor() ?>">
+                                    <input class="btn bt-primary m-1" type="submit" value="<?= i18n("Follow") ?>"">
+                                </form>
+                            <?php }
+                        }
+                    } else { ?>
+                    <button class="btn bt-primary m-1" data-toggle="modal"
+                            data-target="#modalLogin"><?= i18n("Follow") ?>
+                        <?php } ?>
                 </div>
             </div>
 
             <div class="row row-cols-1 p-0 pt-3 pb-3 list-group-item">
                 <div class="col row justify-content-center m-0">
-                    <video class="video-card-view m-1" src="videos/video_2.mp4" autoplay muted loop
+                    <video class="video-card-view m-1" src="upload_videos/<?= $video->getVideoname() ?>" autoplay muted
+                           loop
                            controls></video>
                 </div>
             </div>
@@ -44,24 +60,42 @@ $view = ViewManager::getInstance();
             <div class="row justify-content-between align-items-center pt-3 pb-3 list-group-item">
 
                 <div class="row m-0 p-0 align-items-center">
-                    <a data-toggle="modal" data-target="#modalLogin"><img class="bt-fav m-2"
-                                                                          src="img/estrella_llena.svg"
-                                                                          alt="me gusta"></a>
-                    12736
+                    <?php if (isset($_SESSION["currentuser"])) {
+                        if ($isLike) { ?>
+
+                            <form action="index.php?controller=like&action=dislike" method="post">
+                            <input type="hidden" name="id" value="<?= $video->getId() ?>">
+                            <input type="hidden" name="username" value="<?= $_SESSION["currentuser"] ?>">
+                            <input class="bt-fav m-2" type="image" src="static/img/estrella_llena.svg"
+                                   alt="<?= i18n("Dislike") ?>">
+                            </form><?= $video->getNlikes() ?>
+                        <?php } else { ?>
+
+                            <form action="index.php?controller=like&action=like" method="post">
+                            <input type="hidden" name="id" value="<?= $video->getId() ?>">
+                            <input type="hidden" name="username" value="<?= $_SESSION["currentuser"] ?>">
+                            <input class="bt-fav m-2" type="image" src="static/img/estrella_vacia.svg"
+                                   alt="<?= i18n("Like") ?>">
+                            </form><?= $video->getNlikes() ?>
+                        <?php } ?>
+
+                    <?php } else { ?>
+
+                        <a data-toggle="modal"
+                           data-target="#modalLogin"><img class="bt-fav m-2"
+                                                          src="static/img/estrella_vacia.svg"
+                                                          alt="me gusta"></a><?= $video->getNlikes() ?>
+                    <?php } ?>
                 </div>
                 <div class="row m-0 p-0 text-right">
-                    <a onclick=""><img class="bt-fav m-2" src="img/compartir.svg" alt="compartir"></a>
+                    <a onclick=""><img class="bt-fav m-2" src="static/img/compartir.svg" alt="compartir"></a>
                 </div>
             </div>
 
 
             <div class="row pt-3 pb-3 list-group-item">
 
-                <p class="m-0 p-0 text-center description">It’s starting to look like Christmas 🎄 a little bit
-                    of creation #fyp #parati #christmas It’s starting to look like Christmas 🎄 a little bit
-                    of creation #fyp #parati #christmas It’s starting to look like Christmas 🎄 a little bit
-                    of creation #fyp #parati #christmas It’s starting to look like Christmas 🎄 a little bit
-                    of creation #fyp #parati #christmas</p>
+                <p class="m-0 p-0 text-center description"><?= $video->getVideoDescription() ?></p>
             </div>
         </div>
     </div>
