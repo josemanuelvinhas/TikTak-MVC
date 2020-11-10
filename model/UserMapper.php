@@ -14,10 +14,11 @@ class UserMapper
     public function save($user)
     {
         $stmt = $this->db->prepare("INSERT INTO users (username, email, passwd) values (?,?,?)");
-        $stmt->execute(array($user->getUsername(),$user->getEmail(), $user->getPasswd()));
+        $stmt->execute(array($user->getUsername(), $user->getEmail(), $user->getPasswd()));
     }
 
-    public function findByUsername($username){
+    public function findByUsername($username)
+    {
 
         $stmt = $this->db->prepare("SELECT * FROM users WHERE username=?");
         $stmt->execute(array($username));
@@ -64,5 +65,13 @@ class UserMapper
         if ($stmt->fetchColumn() > 0) {
             return true;
         }
+    }
+
+    public function findTop5ByFollowers(){
+        $stmt = $this->db->query("SELECT username FROM users ORDER BY nfollowers LIMIT 0,5");
+
+        $top5 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $top5;
     }
 }
