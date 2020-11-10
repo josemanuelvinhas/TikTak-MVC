@@ -29,5 +29,9 @@ $i18n_messages =
         "Upload Video" => "Subir Video",
         "followers" => "seguidores",
         "following" => "seguidos",
-        "Description" => "Descrición"
+        "Description" => "Descrición",
+        "Insert between 3 and 20 numbers or letters" => "Introduce entre 3 e 20 números ou letras",
+        "Insert between 3 and 15 numbers or letters" => "Introduce entre 3 e 15 números ou letras",
+        "Insert a valid email" => "Introduce un enderezo electrónico válido",
+        "Insert between 0 and 320 numbers, letters or #" => "Introduce entre 0 e 320 números, letras ou #"
     );

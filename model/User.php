@@ -153,7 +153,7 @@ class User
     private function checkUsername()
     {
         $var = $this->getUsername();
-        $message = "Insert between 3 and 15 numbers and letters";
+        $message = "Insert between 3 or 15 numbers and letters";
         $pattern = "/^[a-zA-Z0-9]{3,15}$/";
 
         $errors = array();
@@ -166,7 +166,7 @@ class User
     private function checkPasswd()
     {
         $var = $this->getPasswd();
-        $message = "Insert between 3 and 20 numbers and letters";
+        $message = "Insert between 3 and 20 numbers or letters";
         $pattern = "/^[a-zA-Z0-9]{3,20}$/";
 
         $errors = array();

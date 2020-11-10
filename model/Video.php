@@ -161,7 +161,7 @@ class Video
     private function checkDescription()
     {
         $var = $this->getVideodescription();
-        $message = "Insert between 0 and 320 numbers, letters and #";
+        $message = "Insert between 0 and 320 numbers, letters or #";
         $pattern = "/^[a-zA-Z0-9À-ÿñÑ #]{0,320}$/";
 
         $errors = array();
