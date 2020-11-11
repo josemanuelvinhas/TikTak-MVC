@@ -8,7 +8,7 @@ $isFollowing = $view->getVariable("isFollowing");
 
 ?>
 
-<div class="col-12 row justify-content-center m-0 mt-3 mb-3 p-0">
+<div class="col-12 row justify-content-center m-0 mt-5 mb-3 p-0">
     <div class="col-xl-6 col-lg-8 col-10 m-0 p-0 list-group">
 
         <div class="row row-cols-2 justify-content-between align-items-center p-0 pb-2 pt-2 list-group-item bg-gris">

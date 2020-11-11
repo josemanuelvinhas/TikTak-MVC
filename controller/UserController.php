@@ -5,6 +5,7 @@ require_once(__DIR__ . "/../model/UserMapper.php");
 require_once(__DIR__ . "/../model/VideoMapper.php");
 require_once(__DIR__ . "/../model/LikeMapper.php");
 require_once(__DIR__ . "/../model/FollowerMapper.php");
+require_once(__DIR__ . "/../model/HashtagMapper.php");
 
 require_once(__DIR__ . "/../core/ViewManager.php");
 require_once(__DIR__ . "/../controller/BaseController.php");
@@ -22,6 +23,7 @@ class UserController extends BaseController
     private $userMapper;
     private $likeMapper;
     private $followerMapper;
+    private $hashtagMapper;
 
     public function __construct()
     {
@@ -31,6 +33,8 @@ class UserController extends BaseController
         $this->userMapper = new UserMapper();
         $this->likeMapper = new LikeMapper();
         $this->followerMapper = new FollowerMapper();
+        $this->hashtagMapper = new HashtagMapper();
+
     }
 
     public function view()
@@ -58,7 +62,7 @@ class UserController extends BaseController
     public function home()
     {
         if (!isset($_SESSION["currentuser"])) {
-            $this->view->redirectToReferer();
+            $this->view->redirect("home", "index");
         }
 
         $user = $this->userMapper->findByUsername($_SESSION["currentuser"]);
@@ -112,6 +116,11 @@ class UserController extends BaseController
         // put the array containing Video object to the view
         $this->view->setVariable("videos", $videos);
 
+        $topUsuarios = $this->userMapper->findTop5ByFollowers();
+        $this->view->setVariable("topUsuarios", $topUsuarios);
+        $trends = $this->hashtagMapper->findTop5Hashtag();
+        $this->view->setVariable("trends", $trends);
+
 
         // render the view (/view/posts/index.php)
 
@@ -135,8 +144,8 @@ class UserController extends BaseController
                     $_SESSION["currentuser"] = $_POST["username"];
 
                     // send user to the restricted area (HTTP 302 code)
-                    //$this->view->redirect("home", "index");
-                    $this->view->redirectToReferer();
+
+                    $this->view->redirect("user", "home");
 
                 } else {
                     $errors = array();
@@ -150,8 +159,19 @@ class UserController extends BaseController
             }
         }
 
-        $videos = $this->videoMapper->findAll();
+        $nVideos = $this->videoMapper->countVideos();
+        $nPags = ceil($nVideos / 6);
+        $videos = $this->videoMapper->findAll(0);
+        if ($nPags > 1) {
+            $this->view->setVariable("next", 1);
+        }
+        $this->view->setVariable("page", 0);
         $this->view->setVariable("videos", $videos);
+
+        $topUsuarios = $this->userMapper->findTop5ByFollowers();
+        $this->view->setVariable("topUsuarios", $topUsuarios);
+        $trends = $this->hashtagMapper->findTop5Hashtag();
+        $this->view->setVariable("trends", $trends);
 
         $this->view->setVariable("user", $user);
         $this->view->render("user", "login");
@@ -177,7 +197,9 @@ class UserController extends BaseController
 
                 if (!$usernameExists & !$emailExists) {
                     $this->userMapper->save($user);
+
                     $this->view->redirect("user", "login");
+
                 } else {
                     $errors = array();
                     if ($usernameExists) {
@@ -195,17 +217,33 @@ class UserController extends BaseController
             }
         }
 
-        $videos = $this->videoMapper->findAll();
+        $nVideos = $this->videoMapper->countVideos();
+        $nPags = ceil($nVideos / 6);
+        $videos = $this->videoMapper->findAll(0);
+        if ($nPags > 1) {
+            $this->view->setVariable("next", 1);
+        }
+        $this->view->setVariable("page", 0);
         $this->view->setVariable("videos", $videos);
+
+        $topUsuarios = $this->userMapper->findTop5ByFollowers();
+        $this->view->setVariable("topUsuarios", $topUsuarios);
+        $trends = $this->hashtagMapper->findTop5Hashtag();
+        $this->view->setVariable("trends", $trends);
 
         $this->view->setVariable("user", $user);
         $this->view->render("user", "register");
+
     }
 
     public function logout()
     {
         session_destroy();
-        $this->view->redirectToReferer();
+        if (isset($_SERVER["HTTP_REFERER"])) {
+            $this->view->redirectToReferer();
+        } else {
+            $this->view->redirect("home", "index");
+        }
 
     }
 }

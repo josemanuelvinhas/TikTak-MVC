@@ -64,3 +64,14 @@
 .bt-subir{
   height: 2em;
 }
+
+@keyframes backgroundflash {
+  75% { opacity:1.0}
+  100% {opacity:0.0; display:none}
+}
+
+.flash {
+  border: 1px solid green;
+  border-radius: 1em;
+  animation: backgroundflash 5s forwards;
+}

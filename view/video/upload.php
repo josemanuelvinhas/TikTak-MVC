@@ -8,5 +8,5 @@ $view = ViewManager::getInstance();
 
 
 <?php $view->moveToFragment("modal"); ?>
-    onLoad="abrirLogin()"
+    onLoad="abrirUpload()"
 <?php $view->moveToDefaultFragment(); ?>

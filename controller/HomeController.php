@@ -6,6 +6,9 @@ require_once(__DIR__ . "/../model/VideoMapper.php");
 require_once(__DIR__ . "/../model/LikeMapper.php");
 require_once(__DIR__ . "/../model/FollowerMapper.php");
 
+require_once(__DIR__ . "/../model/UserMapper.php");
+require_once(__DIR__ . "/../model/HashtagMapper.php");
+
 require_once(__DIR__ . "/../core/ViewManager.php");
 require_once(__DIR__ . "/../controller/BaseController.php");
 
@@ -28,11 +31,15 @@ class HomeController extends BaseController
     private $videoMapper;
     private $likeMapper;
     private $followerMapper;
+    private $userMapper;
+    private $hashtagMapper;
 
     public function __construct()
     {
         parent::__construct();
 
+        $this->userMapper = new UserMapper();
+        $this->hashtagMapper = new HashtagMapper();
         $this->videoMapper = new VideoMapper();
         $this->likeMapper = new LikeMapper();
         $this->followerMapper = new FollowerMapper();
@@ -40,15 +47,13 @@ class HomeController extends BaseController
 
     public function index()
     {
-
-
         $nVideos = $this->videoMapper->countVideos();
         $nPags = ceil($nVideos / 6);
 
         $page = 0;
 
         if (isset($_GET["page"])) {
-            if (preg_match('/^[0-9]+$/', $_GET["page"]) && ($temp = (int) $_GET["page"]) < $nPags) {
+            if (preg_match('/^[0-9]+$/', $_GET["page"]) && ($temp = (int)$_GET["page"]) < $nPags) {
                 $page = $temp;
             } else {
                 $this->view->redirect("home", "index");
@@ -79,6 +84,11 @@ class HomeController extends BaseController
             }
         }
         $this->view->setVariable("page", $page);
+
+        $topUsuarios = $this->userMapper->findTop5ByFollowers();
+        $this->view->setVariable("topUsuarios", $topUsuarios);
+        $trends = $this->hashtagMapper->findTop5Hashtag();
+        $this->view->setVariable("trends", $trends);
 
         // put the array containing Video object to the view
         $this->view->setVariable("videos", $videos);

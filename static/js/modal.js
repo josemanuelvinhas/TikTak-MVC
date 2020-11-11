@@ -5,3 +5,7 @@ function abrirLogin(){
 function abrirRegister(){
     $('#modalRegister').modal('show');
 }
+
+function abrirUpload(){
+    $('#modalUpload').modal('show');
+}

@@ -3,7 +3,8 @@
 
 class Hashtag
 {
-
+    public static $regexpContentHashtag = "/[a-zA-Z0-9]+/";
+    public static $regexpHashtag = "/#([a-zA-Z0-9]+)/";
 
     private $id;
     private $hashtag;
@@ -47,8 +48,12 @@ class Hashtag
 
 
 
-    public function checkIsValidForCreate() {
-        //Falta
+    public static function isValidContentHashtag($hashtag) {
+        return preg_match(Hashtag::$regexpContentHashtag, $hashtag);
+    }
+
+    public static function isValidHashtag($hashtag) {
+        return preg_match(Hashtag::$regexpHashtag, $hashtag);
     }
 
 

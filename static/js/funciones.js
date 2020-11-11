@@ -1,3 +1,5 @@
+//TODO hacer el copyToClipboard
+
 function copyToClipboard(id_elemento){
     var aux = document.createElement("input");
     aux.setAttribute("value", document.getElementById(id_elemento).innerHTML);

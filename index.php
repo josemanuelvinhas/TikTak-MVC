@@ -27,6 +27,7 @@ function run() {
         // Call the corresponding action
         $actionName = $_GET["action"];
         $controller->$actionName();
+
     } catch(Exception $ex) {
         //uniform treatment of exceptions
         die("An exception occured!!!!!".$ex->getMessage());

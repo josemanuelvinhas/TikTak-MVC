@@ -34,4 +34,5 @@ array(
     "Insert between 3 and 15 numbers or letters" => "Introduce entre 3 y 15 números o letras",
     "Insert a valid email" => "Introduce un correo electrónico válido",
     "Insert between 0 and 320 numbers, letters or #" => "Introduce entre 0 y 320 números, letras o #"
+
 );

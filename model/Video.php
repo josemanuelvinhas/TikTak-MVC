@@ -136,14 +136,6 @@ class Video
         $this->nlikes = $nlikes;
     }
 
-
-
-    public function checkIsValidForCreate() {
-        //Falta
-        return array();
-    }
-
-
     public function checkIsValidForUpload()
     {
         $errors = array();

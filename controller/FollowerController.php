@@ -20,22 +20,40 @@ class FollowerController extends BaseController
 
     public function follow()
     {
-        if (isset($_POST["username"])) {
-            $follower = new Follower($_SESSION["currentuser"], $_POST["username"]);
-            $this->followerMapper->save($follower);
+        if (!isset($_SESSION["currentuser"])) {
+            $this->view->redirect("home", "index");
         }
 
-        $this->view->redirectToReferer();
+        if (isset($_POST["username"])) {
+            if (!$this->followerMapper->isFollowing($_SESSION["currentuser"], $_POST["username"])) {
+                $follower = new Follower($_SESSION["currentuser"], $_POST["username"]);
+                $this->followerMapper->save($follower);
+            }
+        }
+
+        if (isset($_SERVER["HTTP_REFERER"])) {
+            $this->view->redirectToReferer();
+        } else {
+            $this->view->redirect("home", "index");
+        }
     }
 
     public function unfollow()
     {
+        if (!isset($_SESSION["currentuser"])) {
+            $this->view->redirect("home", "index");
+        }
+
         if (isset($_POST["username"])) {
             $follower = new Follower($_SESSION["currentuser"], $_POST["username"]);
             $this->followerMapper->delete($follower);
         }
 
-        $this->view->redirectToReferer();
+        if (isset($_SERVER["HTTP_REFERER"])) {
+            $this->view->redirectToReferer();
+        } else {
+            $this->view->redirect("home", "index");
+        }
     }
 
 }

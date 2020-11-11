@@ -7,6 +7,6 @@ $view = ViewManager::getInstance();
 ?>
 
 
-<?php $view->moveToFragment("login_register");?>
+<?php $view->moveToFragment("modal");?>
     onLoad="abrirRegister()"
 <?php $view->moveToDefaultFragment(); ?>

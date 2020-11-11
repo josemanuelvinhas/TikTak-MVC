@@ -18,9 +18,9 @@ $currentuser = $view->getVariable("currentusername");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
-    <script src="static/js/login_register.js"></script>
+    <script src="static/js/modal.js"></script>
 </head>
-<body <?= $view->getFragment("login_register") ?>>
+<body <?= $view->getFragment("modal") ?>>
 <div class="container-fluid bg-white">
     <header class="row align-items-center justify-content-around border-bottom border-ligth pt-2 pb-2">
         <div class="col-12 col-sm-6 col row align-items-center justify-content-center justify-content-sm-start">
@@ -48,12 +48,13 @@ $currentuser = $view->getVariable("currentusername");
                     <ul class="dropdown-menu" role="menu">
                         <li><a class="dropdown-item"
                                href="index.php?controller=home&action=index"><?= i18n("Index") ?></a></li>
-                        <li><a class="dropdown-item" href="index.php?controller=user&action=home"><?= i18n("Home") ?></a></li>
+                        <li><a class="dropdown-item"
+                               href="index.php?controller=user&action=home"><?= i18n("Home") ?></a></li>
                         <li><a class="dropdown-item"
                                href="index.php?controller=user&action=view&username=<?= $_SESSION["currentuser"] ?>"><?= i18n("Profile") ?></a>
                         </li>
                         <li><a class="dropdown-item" data-toggle="modal"
-                               data-target="#modalUpload" href="" ><?= i18n("Upload Video") ?></a></li>
+                               data-target="#modalUpload" href=""><?= i18n("Upload Video") ?></a></li>
                         <li class="dropdown-divider"></li>
                         <li><a class="dropdown-item"
                                href="index.php?controller=user&amp;action=logout"><?= i18n("Log out") ?></a></li>
@@ -64,8 +65,11 @@ $currentuser = $view->getVariable("currentusername");
 
     </header>
 
-    <main class="row mb-5">
-        <?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
+    <main class="row mb-5 justify-content-center">
+        <div class="row col-12">
+            <?= $view->getFragment(ViewManager::DEFAULT_FRAGMENT) ?>
+        </div>
+
     </main>
 
     <?php if (!isset($currentuser)):

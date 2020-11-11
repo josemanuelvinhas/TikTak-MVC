@@ -20,24 +20,38 @@ class LikeController extends BaseController
 
     public function like()
     {
+        if (!isset($_SESSION["currentuser"])) {
+            $this->view->redirect("home", "index");
+        }
 
-        if (isset($_POST["username"]) & isset($_POST["id"])) {
-            $like = new Like($_POST["id"], $_POST["username"]);
+        if (isset($_POST["id"])) {
+            $like = new Like($_POST["id"], $_SESSION["currentuser"]);
             $this->likeMapper->save($like);
         }
 
-        $this->view->redirectToReferer();
+        if (isset($_SERVER["HTTP_REFERER"])) {
+            $this->view->redirectToReferer();
+        } else {
+            $this->view->redirect("home", "index");
+        }
     }
 
     public function dislike()
     {
+        if (!isset($_SESSION["currentuser"])) {
+            $this->view->redirect("home", "index");
+        }
 
-        if (isset($_POST["username"]) & isset($_POST["id"])) {
-            $like = new Like($_POST["id"], $_POST["username"]);
+        if (isset($_POST["id"])) {
+            $like = new Like($_POST["id"], $_SESSION["currentuser"]);
             $this->likeMapper->delete($like);
         }
 
-        $this->view->redirectToReferer();
+        if (isset($_SERVER["HTTP_REFERER"])) {
+            $this->view->redirectToReferer();
+        } else {
+            $this->view->redirect("home", "index");
+        }
     }
 
 }
