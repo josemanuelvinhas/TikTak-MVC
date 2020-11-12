@@ -3,6 +3,9 @@ require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 
 $hashtag = $view->getVariable("hashtag");
+$next = $view->getVariable("next");
+$previous = $view->getVariable("previous");
+$page = $view->getVariable("page");
 ?>
 
 <div class="col-12 justify-content-center d-xl-none d-block">
@@ -23,9 +26,22 @@ $hashtag = $view->getVariable("hashtag");
     include(__DIR__ . "/../layouts/videos_view.php");
     ?>
 
-    <?php
-    include(__DIR__ . "/../layouts/page_bar.php");
-    ?>
+    <div class="col-12 row justify-content-center align-items-center mt-2">
+        <?php if (isset($previous)): ?>
+            <a href="index.php?controller=video&amp;action=search&amp;hashtag=<?= $hashtag ?>&page=<?= $previous ?>" class="m-2">
+                <img class="bt-pag m-2" src="static/img/anterior.svg" alt="<?= i18n("Previous") ?>">
+            </a>
+        <?php endif ?>
+
+        <a href="index.php?controller=video&amp;action=search&amp;hashtag=<?= $hashtag ?>&page=<?= $page ?>"
+           class="m-2"><?= $page ?></a>
+
+        <?php if (isset($next)): ?>
+            <a href="index.php?controller=video&amp;action=search&amp;hashtag=<?= $hashtag ?>&page=<?= $next ?>" class="m-2">
+                <img class="bt-pag m-2" src="static/img/proximo.svg" alt="<?= i18n("Next") ?>">
+            </a>
+        <?php endif ?>
+    </div>
 </div>
 
 

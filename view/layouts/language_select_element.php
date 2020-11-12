@@ -2,7 +2,7 @@
 // file: view/layouts/language_select_element.php
 ?>
 <div class="col-4 dropup">
-    <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown">Idioma</button>
+    <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown"><?= i18n("Language") ?></button>
     <ul id="languagechooser" class="dropdown-menu">
         <li><a class="dropdown-item" href="index.php?controller=language&amp;action=change&amp;lang=es">
                 <?= i18n("Spanish") ?>

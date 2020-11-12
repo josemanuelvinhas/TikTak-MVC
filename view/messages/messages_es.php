@@ -33,6 +33,17 @@ array(
     "Insert between 3 and 20 numbers or letters" => "Introduce entre 3 y 20 números o letras",
     "Insert between 3 and 15 numbers or letters" => "Introduce entre 3 y 15 números o letras",
     "Insert a valid email" => "Introduce un correo electrónico válido",
-    "Insert between 0 and 320 numbers, letters or #" => "Introduce entre 0 y 320 números, letras o #"
+    "Insert between 0 and 320 numbers, letters or #" => "Introduce entre 0 y 320 números, letras o #",
+    "Click to copy to clipboard" => "Haz click para copiar al portapapeles",
+    "Next" => "Siguiente",
+    "Previous" => "Anterior",
+    "Logo" => "Logo",
+    "Open Menu" => "Abrir Menú",
+    "Language" => "Idioma",
+    "Gold Medal" => "Medalla de Oro",
+    "Silver Medal" => "Medalla de Plata",
+    "Bronze Medal" => "Medalla de Bronce",
+    "Delete" => "Eliminar",
+    "Share" => "Compartir"
 
 );

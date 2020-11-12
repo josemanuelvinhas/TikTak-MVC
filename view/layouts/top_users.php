@@ -15,11 +15,11 @@ $topUsuarios = $view->getVariable("topUsuarios");
             <div class="row justify-content-between align-items-center ml-1 mr-1">
                 @<?= $topUsuario["username"] ?>
                 <?php if ($cont == 1) { ?>
-                    <img class="medalla" src="static/img/1Trophy.png" alt="medalla oro">
+                    <img class="medalla" src="static/img/1Trophy.png" alt="<?= i18n("Gold Medal") ?>">
                 <?php } elseif ($cont == 2) { ?>
-                    <img class="medalla" src="static/img/2Trophy_2.png" alt="medalla plata">
+                    <img class="medalla" src="static/img/2Trophy_2.png" alt="<?= i18n("Silver Medal") ?>">
                 <?php } elseif ($cont == 3) { ?>
-                    <img class="medalla" src="static/img/3Trophy_2.png" alt="medalla bronce">
+                    <img class="medalla" src="static/img/3Trophy_2.png" alt="<?= i18n("Bronze Medal") ?>">
                 <?php }
                 $cont++;
                 ?>

@@ -17,6 +17,7 @@ $currentuser = $view->getVariable("currentusername");
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="static/js/modal.js"></script>
     <script src="static/js/clipboard.js"></script>
 </head>
@@ -25,7 +26,7 @@ $currentuser = $view->getVariable("currentusername");
     <header class="row align-items-center justify-content-around border-bottom border-ligth pt-2 pb-2">
         <div class="col-12 col-sm-6 col row align-items-center justify-content-center justify-content-sm-start">
             <a href="index.php?controller=home&action=index">
-                <img class="logo_header" src="static/img/logo.png" alt="Logo">
+                <img class="logo_header" src="static/img/logo.png" alt="<?= i18n("Logo") ?>">
             </a>
 
             <a href="index.php?controller=home&action=index">
@@ -44,7 +45,7 @@ $currentuser = $view->getVariable("currentusername");
                                                           href="index.php?controller=user&action=view&username=<?= $_SESSION["currentuser"] ?>"><?= "@" . $_SESSION["currentuser"] ?></a>
                 </div>
                 <div class="btn-group dropleft">
-                    <img class="bt-menu m-2" src="static/img/menu.svg" data-toggle="dropdown" alt="abrir menu">
+                    <img class="bt-menu m-2" src="static/img/menu.svg" data-toggle="dropdown" alt="<?= i18n("Open Menu") ?>">
                     <ul class="dropdown-menu" role="menu">
                         <li><a class="dropdown-item"
                                href="index.php?controller=home&action=index"><?= i18n("Index") ?></a></li>

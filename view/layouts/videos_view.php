@@ -23,17 +23,17 @@ $followers = $view->getVariable("followers");
                                 <form action="index.php?controller=follower&action=unfollow" method="post">
                                     <input type="hidden" name="username" value="<?= $post->getAuthor() ?>">
                                     <input class="btn bt-outline-primary m-1" type="submit"
-                                           value="<?= i18n("Unfollow") ?>"">
+                                           value="<?= i18n("Unfollow") ?>">
                                 </form>
                             <?php } else { ?>
                                 <form action="index.php?controller=follower&action=follow" method="post">
                                     <input type="hidden" name="username" value="<?= $post->getAuthor() ?>">
-                                    <input class="btn bt-primary m-1" type="submit" value="<?= i18n("Follow") ?>"">
+                                    <input class="btn bt-primary m-1" type="submit" value="<?= i18n("Follow") ?>">
                                 </form>
                             <?php }
                         } else { ?>
                             <a><img class="bt-fav m-2 invisible" src="static/img/borrar.svg"
-                                    alt="delete"></a>
+                                    alt="<?= i18n("Delete") ?>"></a>
                         <?php }
                     } else { ?>
                         <button class="btn bt-primary m-1" data-toggle="modal"
@@ -77,13 +77,12 @@ $followers = $view->getVariable("followers");
                                 <a data-toggle="modal"
                                    data-target="#modalLogin"><img class="bt-fav m-2"
                                                                   src="static/img/estrella_vacia.svg"
-                                                                  alt="me gusta"></a><?= $post->getNlikes() ?>
+                                                                  alt="<?= i18n("Like") ?>"></a><?= $post->getNlikes() ?>
                             <?php } ?>
                         </div>
 
-                        <div class="invisible" id="copiar" >Prueba copiar</div>
-                        <a onclick="" id="copyClip" data-clipboard-target="#copiar"><img class="bt-fav m-2" src="static/img/compartir.svg"
-                                                            alt="compartir"></a>
+                        <a onclick="copyToClipboard('<?= "localhost/tiktak/index.php?controller=video&amp;action=view&amp;id=" . $post->getId() ?>')"  data-toggle="popover" data-placement="top" data-trigger="hover" data-content="<?= i18n("Click to copy to clipboard") ?>"><img class="bt-fav m-2" src="static/img/compartir.svg"
+                                                                    alt="<?= i18n("Share") ?>"></a>
                     </div>
                     <div class="row justify-content-center">
                         <p class="m-0 p-0"><?= $post->getVideodescription() ?></p>

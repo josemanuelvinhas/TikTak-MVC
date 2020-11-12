@@ -69,8 +69,7 @@ class VideoController extends BaseController
                 $this->hashtagMapper->save($hashtag);
             }
 
-            //TODO redirigir a pagina de video
-            $queryString = "is=" . $id;
+            $queryString = "id=" . $id;
             $this->view->redirect("video", "view", $queryString);
         } else {
 

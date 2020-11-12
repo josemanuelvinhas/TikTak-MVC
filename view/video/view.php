@@ -84,11 +84,12 @@ $isFollow = $view->getVariable("isFollow");
                         <a data-toggle="modal"
                            data-target="#modalLogin"><img class="bt-fav m-2"
                                                           src="static/img/estrella_vacia.svg"
-                                                          alt="me gusta"></a><?= $video->getNlikes() ?>
+                                                          alt="<?= i18n("Like") ?>"></a><?= $video->getNlikes() ?>
                     <?php } ?>
                 </div>
                 <div class="row m-0 p-0 text-right">
-                    <a onclick=""><img class="bt-fav m-2" src="static/img/compartir.svg" alt="compartir"></a>
+                    <a onclick="copyToClipboard('<?= "localhost/tiktak/index.php?controller=video&amp;action=view&amp;id=" . $video->getId() ?>')"  data-toggle="popover" data-placement="top" data-trigger="hover" data-content="<?= i18n("Click to copy to clipboard") ?>"><img class="bt-fav m-2" src="static/img/compartir.svg"
+                                                                                                                                                                                                                                                                                 alt="<?= i18n("Share") ?>"></a>
                 </div>
             </div>
 

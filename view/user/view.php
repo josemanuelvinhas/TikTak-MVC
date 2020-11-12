@@ -70,18 +70,24 @@ $isFollowing = $view->getVariable("isFollowing");
                 if (($cont % 3) === 0):
                     ?>
                     <div class="col row justify-content-sm-end justify-content-center m-0">
-                        <video class="video-card-perfil m-1" src="upload_videos/<?= $post->getVideoname() ?>"
-                               autoplay muted loop controls></video>
+                        <a href="index.php?controller=video&amp;action=view&amp;id=<?= $post->getId() ?>">
+                            <video class="video-card-perfil m-1" src="upload_videos/<?= $post->getVideoname() ?>"
+                                   muted loop controls></video>
+                        </a>
                     </div>
                 <?php elseif (($cont % 3) === 1): ?>
                     <div class="col row justify-content-sm-center justify-content-center m-0">
-                        <video class="video-card-perfil m-1" src="upload_videos/<?= $post->getVideoname() ?>"
-                               autoplay muted loop controls></video>
+                        <a href="index.php?controller=video&amp;action=view&amp;id=<?= $post->getId() ?>">
+                            <video class="video-card-perfil m-1" src="upload_videos/<?= $post->getVideoname() ?>"
+                                   muted loop controls></video>
+                        </a>
                     </div>
                 <?php else: ?>
                     <div class="col row justify-content-sm-start justify-content-center m-0">
-                        <video class="video-card-perfil m-1" src="upload_videos/<?= $post->getVideoname() ?>"
-                               autoplay muted loop controls></video>
+                        <a href="index.php?controller=video&amp;action=view&amp;id=<?= $post->getId() ?>">
+                            <video class="video-card-perfil m-1" src="upload_videos/<?= $post->getVideoname() ?>"
+                                   muted loop controls></video>
+                        </a>
                     </div>
                 <?php endif;
                 $cont++;
