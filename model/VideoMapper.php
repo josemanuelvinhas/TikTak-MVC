@@ -109,7 +109,7 @@ class VideoMapper
 
     public function findAllByAuthor($author)
     {
-        $stmt = $this->db->prepare("SELECT * FROM videos WHERE author=?");
+        $stmt = $this->db->prepare("SELECT * FROM videos WHERE author=? ORDER BY videodate DESC ");
         $stmt->execute(array($author));
         $videos_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -134,7 +134,7 @@ class VideoMapper
     {
         $stmt = $this->db->prepare("DELETE from videos WHERE id=?");
         $stmt->execute(array($video->getId()));
-        unlink($video->getVideoname());
+        unlink(__DIR__ ."/../upload_videos/".$video->getVideoname());
     }
 
     public function uploadVideo()

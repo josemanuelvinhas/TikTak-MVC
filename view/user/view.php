@@ -12,7 +12,7 @@ $isFollowing = $view->getVariable("isFollowing");
     <div class="col-xl-6 col-lg-8 col-10 m-0 p-0 list-group">
 
         <div class="row row-cols-2 justify-content-between align-items-center p-0 pb-2 pt-2 list-group-item bg-gris">
-            <div class="col text-center font-weight-bold"><?= "@" . $usuario->getUsername() ?></div>
+            <h5 class="col text-center m-0 p-0 font-weight-bold"><?= "@" . $usuario->getUsername() ?></h5>
             <?php if (isset($_SESSION["currentuser"])) {
                 if ($usuario->getUsername() === $_SESSION["currentuser"]): ?>
                     <div class="col text-center">
@@ -72,21 +72,21 @@ $isFollowing = $view->getVariable("isFollowing");
                     <div class="col row justify-content-sm-end justify-content-center m-0">
                         <a href="index.php?controller=video&amp;action=view&amp;id=<?= $post->getId() ?>">
                             <video class="video-card-perfil m-1" src="upload_videos/<?= $post->getVideoname() ?>"
-                                   muted loop controls></video>
+                                   muted loop></video>
                         </a>
                     </div>
                 <?php elseif (($cont % 3) === 1): ?>
                     <div class="col row justify-content-sm-center justify-content-center m-0">
                         <a href="index.php?controller=video&amp;action=view&amp;id=<?= $post->getId() ?>">
                             <video class="video-card-perfil m-1" src="upload_videos/<?= $post->getVideoname() ?>"
-                                   muted loop controls></video>
+                                   muted loop></video>
                         </a>
                     </div>
                 <?php else: ?>
                     <div class="col row justify-content-sm-start justify-content-center m-0">
                         <a href="index.php?controller=video&amp;action=view&amp;id=<?= $post->getId() ?>">
                             <video class="video-card-perfil m-1" src="upload_videos/<?= $post->getVideoname() ?>"
-                                   muted loop controls></video>
+                                   muted loop></video>
                         </a>
                     </div>
                 <?php endif;

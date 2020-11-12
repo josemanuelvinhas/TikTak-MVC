@@ -44,6 +44,8 @@ array(
     "Silver Medal" => "Medalla de Plata",
     "Bronze Medal" => "Medalla de Bronce",
     "Delete" => "Eliminar",
-    "Share" => "Compartir"
+    "Share" => "Compartir",
+    "Search by" => "Buscar por",
+    "Error uploading video" => "Error subiendo el video"
 
 );

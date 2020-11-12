@@ -68,7 +68,7 @@ class UserMapper
     }
 
     public function findTop5ByFollowers(){
-        $stmt = $this->db->query("SELECT username FROM users ORDER BY nfollowers LIMIT 0,5");
+        $stmt = $this->db->query("SELECT username FROM users ORDER BY nfollowers DESC LIMIT 0,5");
 
         $top5 = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

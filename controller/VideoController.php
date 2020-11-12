@@ -52,7 +52,7 @@ class VideoController extends BaseController
             $video->checkIsValidForUpload();
         } catch (ValidationException $ex) {
             if (isset($video)) {
-                unlink($video->getVideoname());
+                unlink(__DIR__ . "/../upload_videos/" . $video->getVideoname());
             }
             $errors = $ex->getErrors();
             $this->view->setVariable("errors_upload", $errors);
@@ -72,8 +72,6 @@ class VideoController extends BaseController
             $queryString = "id=" . $id;
             $this->view->redirect("video", "view", $queryString);
         } else {
-
-            $videos = $this->videoMapper->findAll(0);
             if (isset($this->currentUser)) {
                 $idLikes = $this->likeMapper->findByUsername($_SESSION["currentuser"]);
                 $this->view->setVariable("idLikes", $idLikes);
@@ -89,6 +87,10 @@ class VideoController extends BaseController
             }
             $this->view->setVariable("page", 0);
             $this->view->setVariable("videos", $videos);
+            $topUsuarios = $this->userMapper->findTop5ByFollowers();
+            $this->view->setVariable("topUsuarios", $topUsuarios);
+            $trends = $this->hashtagMapper->findTop5Hashtag();
+            $this->view->setVariable("trends", $trends);
 
             $this->view->render("video", "upload");
         }

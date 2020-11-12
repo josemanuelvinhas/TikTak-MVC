@@ -5,7 +5,7 @@ $view = ViewManager::getInstance();
 $currentuser = $view->getVariable("currentusername");
 
 ?><!DOCTYPE html>
-<html>
+<html lang="<?= $_SESSION["__currentlang__"] ?>">
 <head>
     <meta charset="UTF-8">
     <title><?= $view->getVariable("title", "TikTak") ?></title>

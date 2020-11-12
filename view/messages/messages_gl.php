@@ -44,5 +44,7 @@ $i18n_messages =
         "Silver Medal" => "Medalla de Prata",
         "Bronze Medal" => "Medalla de Bronce",
         "Delete" => "Eliminar",
-        "Share" => "Compartir"
+        "Share" => "Compartir",
+        "Search by" => "Buscar por",
+        "Error uploading video" => "Erro subindo o video"
     );

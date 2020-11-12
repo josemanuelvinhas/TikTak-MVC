@@ -45,7 +45,7 @@ $followers = $view->getVariable("followers");
                     <a href="index.php?controller=video&amp;action=view&amp;id=<?= $post->getId() ?>">
                         <video class="video-card" src="upload_videos/<?= $post->getVideoname() ?>" autoplay muted
                                loop
-                               controls></video>
+                               ></video>
                     </a>
                 </div>
 

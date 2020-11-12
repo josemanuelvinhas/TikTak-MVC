@@ -22,8 +22,7 @@ $user = $view->getVariable("user");
                     <div class="form-group">
                         <label for="formUploadInVideo"><?= i18n("Video") ?></label>
                         <input type="file" accept="video/mp4" class="form-control-file" name="videoUpload"
-                               id="formUploadInVideo"
-                               placeholder="<?= i18n("Video") ?>">
+                               id="formUploadInVideo" >
                         <?php if (isset($errors["video"])) { ?>
                             <small class="form-text text-danger">
                                 <?php foreach ($errors["video"] as $err) { ?>
