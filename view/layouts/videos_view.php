@@ -81,7 +81,8 @@ $followers = $view->getVariable("followers");
                             <?php } ?>
                         </div>
 
-                        <a onclick="copyToClipboard()"><img class="bt-fav m-2" src="static/img/compartir.svg"
+                        <div class="invisible" id="copiar" >Prueba copiar</div>
+                        <a onclick="" id="copyClip" data-clipboard-target="#copiar"><img class="bt-fav m-2" src="static/img/compartir.svg"
                                                             alt="compartir"></a>
                     </div>
                     <div class="row justify-content-center">

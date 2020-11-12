@@ -17,8 +17,8 @@ $currentuser = $view->getVariable("currentusername");
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
     <script src="static/js/modal.js"></script>
+    <script src="static/js/clipboard.js"></script>
 </head>
 <body <?= $view->getFragment("modal") ?>>
 <div class="container-fluid bg-white">
