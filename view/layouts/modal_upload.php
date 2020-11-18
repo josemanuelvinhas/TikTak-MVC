@@ -1,4 +1,6 @@
 <?php
+// file: view/layouts/modal_upload.php
+
 require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 $errors = $view->getVariable("errors_upload");

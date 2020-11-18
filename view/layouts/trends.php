@@ -1,4 +1,6 @@
 <?php
+// file: view/layouts/trends.php
+
 require_once(__DIR__ . "/../../core/ViewManager.php");
 $view = ViewManager::getInstance();
 

@@ -1,17 +1,12 @@
 <?php
+//file: model/HashtagMapper.php
+
 require_once(__DIR__."/../core/PDOConnection.php");
-
-
 require_once(__DIR__."/../model/Hashtag.php");
-
 
 class HashtagMapper
 {
 
-    /**
-     * Reference to the PDO connection
-     * @var PDO
-     */
     private $db;
 
     public function __construct()

@@ -1,3 +1,7 @@
+<?php
+// file: view/layouts/search_bar.php
+
+?>
 <div class="col-12 mb-4 mt-5">
     <form method="get" action="index.php">
         <div class="input-group">

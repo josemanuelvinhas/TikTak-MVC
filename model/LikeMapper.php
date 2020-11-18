@@ -1,17 +1,12 @@
 <?php
+//file: model/LikeMapper.php
+
 require_once(__DIR__ . "/../core/PDOConnection.php");
-
-
 require_once(__DIR__ . "/../model/Like.php");
-
 
 class LikeMapper
 {
 
-    /**
-     * Reference to the PDO connection
-     * @var PDO
-     */
     private $db;
 
     public function __construct()

@@ -1,23 +1,17 @@
 <?php
+//file: model/User.php
+
 require_once(__DIR__ . "/../core/ValidationException.php");
 
 class User
 {
-    // username, email, passwd, nfollowers
 
     private $username;
     private $passwd;
     private $email;
     private $nfollowers;
+    private $nfollowings;
 
-    /**
-     * User constructor.
-     * @param $username
-     * @param $passwd
-     * @param $email
-     * @param $nfollowers
-     * @param $nfollowings
-     */
     public function __construct($username = NULL, $passwd = NULL, $email = NULL, $nfollowers = NULL, $nfollowings = NULL)
     {
         $this->username = $username;
@@ -27,81 +21,51 @@ class User
         $this->nfollowings = $nfollowings;
     }
 
-    /**
-     * @return mixed|null
-     */
     public function getUsername()
     {
         return $this->username;
     }
 
-    /**
-     * @param mixed|null $username
-     */
     public function setUsername($username)
     {
         $this->username = $username;
     }
 
-    /**
-     * @return mixed|null
-     */
     public function getPasswd()
     {
         return $this->passwd;
     }
 
-    /**
-     * @param mixed|null $passwd
-     */
     public function setPasswd($passwd)
     {
         $this->passwd = $passwd;
     }
 
-    /**
-     * @return mixed|null
-     */
     public function getEmail()
     {
         return $this->email;
     }
 
-    /**
-     * @param mixed|null $email
-     */
     public function setEmail($email)
     {
         $this->email = $email;
     }
 
-    /**
-     * @return mixed|null
-     */
     public function getNfollowings()
     {
         return $this->nfollowings;
     }
 
-    /**
-     * @param mixed|null $nfollowings
-     */
     public function setNfollowings($nfollowings)
     {
         $this->nfollowings = $nfollowings;
     }
 
-    /**
-     * @return mixed|null
-     */
     public function getNfollowers()
     {
         return $this->nfollowers;
     }
 
-    /**
-     * @param mixed|null $nfollowers
-     */
     public function setNfollowers($nfollowers)
     {
         $this->nfollowers = $nfollowers;
@@ -180,7 +144,6 @@ class User
     {
         $var = $this->getEmail();
         $message = "Insert a valid email";
-        $pattern = "//";
 
         $errors = array();
         if(!filter_var($var, FILTER_VALIDATE_EMAIL)) {

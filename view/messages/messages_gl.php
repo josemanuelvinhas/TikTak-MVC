@@ -1,5 +1,6 @@
 <?php
 //file: /view/messages/messages_gl.php
+
 $i18n_messages =
     array(
         "Spanish" => "Español",

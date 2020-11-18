@@ -1,17 +1,12 @@
 <?php
+//file: model/VideoMapper.php
+
 require_once(__DIR__ . "/../core/PDOConnection.php");
-
-
 require_once(__DIR__ . "/../model/Video.php");
-
 
 class VideoMapper
 {
 
-    /**
-     * Reference to the PDO connection
-     * @var PDO
-     */
     private $db;
 
     public function __construct()

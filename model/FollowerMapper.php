@@ -1,16 +1,12 @@
 <?php
+//file: model/FollowerMapper.php
+
 require_once(__DIR__ . "/../core/PDOConnection.php");
-
 require_once(__DIR__ . "/../model/Follower.php");
-
 
 class FollowerMapper
 {
 
-    /**
-     * Reference to the PDO connection
-     * @var PDO
-     */
     private $db;
 
     public function __construct()

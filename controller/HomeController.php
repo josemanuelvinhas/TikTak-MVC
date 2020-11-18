@@ -3,6 +3,7 @@
 
 require_once(__DIR__ . "/../model/Video.php");
 require_once(__DIR__ . "/../model/VideoMapper.php");
+
 require_once(__DIR__ . "/../model/LikeMapper.php");
 require_once(__DIR__ . "/../model/FollowerMapper.php");
 
@@ -12,22 +13,10 @@ require_once(__DIR__ . "/../model/HashtagMapper.php");
 require_once(__DIR__ . "/../core/ViewManager.php");
 require_once(__DIR__ . "/../controller/BaseController.php");
 
-/**
- * Class PostsController
- *
- * Controller to make a CRUDL of Posts entities
- *
- * @author lipido <lipido@gmail.com>
- */
+
 class HomeController extends BaseController
 {
 
-    /**
-     * Reference to the VideoMapper to interact
-     * with the database
-     *
-     * @var VideoMapper
-     */
     private $videoMapper;
     private $likeMapper;
     private $followerMapper;
@@ -87,14 +76,13 @@ class HomeController extends BaseController
 
         $topUsuarios = $this->userMapper->findTop5ByFollowers();
         $this->view->setVariable("topUsuarios", $topUsuarios);
+
         $trends = $this->hashtagMapper->findTop5Hashtag();
         $this->view->setVariable("trends", $trends);
 
-        // put the array containing Video object to the view
         $this->view->setVariable("videos", $videos);
 
 
-        // render the view (/view/posts/index.php)
 
         $this->view->render("home", "index");
     }

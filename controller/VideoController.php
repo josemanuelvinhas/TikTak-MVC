@@ -1,12 +1,11 @@
 <?php
+//file: controller/VideoController.php
 
 require_once(__DIR__ . "/../model/Video.php");
 require_once(__DIR__ . "/../model/VideoMapper.php");
 
 require_once(__DIR__ . "/../model/LikeMapper.php");
-
 require_once(__DIR__ . "/../model/FollowerMapper.php");
-
 require_once(__DIR__ . "/../model/UserMapper.php");
 
 require_once(__DIR__ . "/../model/Hashtag.php");

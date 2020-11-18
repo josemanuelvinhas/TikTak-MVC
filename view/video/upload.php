@@ -1,4 +1,5 @@
 <?php
+//file: /view/video/upload.php
 
 include(__DIR__ . "/../home/index.php");
 require_once(__DIR__ . "/../../core/ViewManager.php");

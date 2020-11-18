@@ -1,7 +1,9 @@
 <?php
+//file: controller/UserController.php
 
 require_once(__DIR__ . "/../model/User.php");
 require_once(__DIR__ . "/../model/UserMapper.php");
+
 require_once(__DIR__ . "/../model/VideoMapper.php");
 require_once(__DIR__ . "/../model/LikeMapper.php");
 require_once(__DIR__ . "/../model/FollowerMapper.php");
@@ -13,12 +15,6 @@ require_once(__DIR__ . "/../controller/BaseController.php");
 class UserController extends BaseController
 {
 
-    /**
-     * Reference to the VideoMapper to interact
-     * with the database
-     *
-     * @var VideoMapper
-     */
     private $videoMapper;
     private $userMapper;
     private $likeMapper;
@@ -228,6 +224,7 @@ class UserController extends BaseController
 
         $topUsuarios = $this->userMapper->findTop5ByFollowers();
         $this->view->setVariable("topUsuarios", $topUsuarios);
+
         $trends = $this->hashtagMapper->findTop5Hashtag();
         $this->view->setVariable("trends", $trends);
 
