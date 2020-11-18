@@ -30,8 +30,8 @@ Pasos para probar la aplicación:
 ## Construido con :hammer_and_wrench:
 
 * [mvcblog](https://github.com/lipido/mvcblog) - Framework MVC
-* [PhpStorm](https://www.jetbrains.com/es-es/phpstorm/)
-* [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
+* [PhpStorm](https://www.jetbrains.com/es-es/phpstorm/) - IDE
+* [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/) - Framework front-end
 
 ## Autores :black_nib:
 
