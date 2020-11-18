@@ -96,3 +96,5 @@ BEGIN
     SELECT COUNT(*) INTO numfollowings FROM FOLLOWERS WHERE FOLLOWERS.username_follower = OLD.username_follower;
     UPDATE USERS SET nfollowing = numfollowings WHERE USERS.username = OLD.username_follower;
 END//
+
+grant all privileges on mvcuser.* to tiktak@localhost identified by "mvctiktakpass";
