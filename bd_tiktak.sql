@@ -97,4 +97,4 @@ BEGIN
     UPDATE USERS SET nfollowing = numfollowings WHERE USERS.username = OLD.username_follower;
 END//
 
-grant all privileges on mvcuser.* to tiktak@localhost identified by "mvctiktakpass";
+grant all privileges on tiktak.* to mvcuser@localhost identified by "mvctiktakpass";
